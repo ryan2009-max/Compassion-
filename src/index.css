@@ -242,3 +242,20 @@
     }
   }
 }
+
+@media print {
+  html, body {
+    color: #000 !important;
+    background: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  #root {
+    display: block !important;
+  }
+  .text-gradient {
+    -webkit-text-fill-color: initial !important;
+    background: none !important;
+    color: #000 !important;
+  }
+}
