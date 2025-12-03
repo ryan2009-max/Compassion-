@@ -131,7 +131,7 @@ export default function Login() {
           <div className="flex justify-center">
             <div className="relative">
               <h1 className="text-4xl font-bold text-gradient mb-2">
-                Compassion Safe
+                FGCK LWANDA CDC HUB
               </h1>
               <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 blur rounded-lg -z-10" />
             </div>

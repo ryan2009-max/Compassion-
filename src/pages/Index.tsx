@@ -52,14 +52,14 @@ const Index = () => {
                     }}
                   >
                     <Logo imgClassName="w-10 h-10 text-primary-foreground" />
-                    <span className="sr-only">Compassion Safe</span>
+                    <span className="sr-only">FGCK LWANDA CDC HUB</span>
                   </button>
                 </div>
                 <div className="absolute -inset-2 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur animate-pulse-glow -z-10" />
               </div>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-gradient mb-4">
-              Compassion Safe
+              FGCK LWANDA CDC HUB
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
               Secure data management with compassion at heart
