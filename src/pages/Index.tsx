@@ -12,13 +12,17 @@ const Index = () => {
     // Check if user is already authenticated
     const authData = sessionStorage.getItem('auth');
     if (authData) {
-      const parsed = JSON.parse(authData);
-      if (parsed.isAuthenticated) {
-        if (parsed.userType === 'admin') {
-          navigate('/admin/dashboard');
-        } else {
-          navigate('/user/dashboard');
+      try {
+        const parsed = JSON.parse(authData);
+        if (parsed?.isAuthenticated) {
+          if (parsed.userType === 'admin') {
+            navigate('/admin/dashboard', { replace: true });
+          } else {
+            navigate('/user/dashboard', { replace: true });
+          }
         }
+      } catch (e) {
+        sessionStorage.removeItem('auth');
       }
     }
   }, [navigate]);
