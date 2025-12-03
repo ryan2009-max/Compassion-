@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, Plus, Settings, Trash2, Edit3 } from 'lucide-react';
+import { ArrowLeft, Plus, Settings, Trash2, Edit3, Eye, Pencil, Link as LinkIcon, Image as ImageIcon } from 'lucide-react';
 import { FuturisticButton } from '@/components/ui/futuristic-button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 
 interface SystemField {
   id: string;
@@ -43,6 +44,12 @@ export default function SystemSettings({ onBack }: SystemSettingsProps) {
   });
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+  const [mode, setMode] = useState<'edit' | 'preview'>('edit');
+  const [annTitle, setAnnTitle] = useState('Announcement Title');
+  const [annBody, setAnnBody] = useState('Describe the announcement details here. Include any important information users should see.');
+  const [annImageUrl, setAnnImageUrl] = useState('');
+  const [annCtaText, setAnnCtaText] = useState('Learn More');
+  const [annCtaHref, setAnnCtaHref] = useState('');
 
   useEffect(() => {
     loadCategories();
@@ -417,6 +424,74 @@ export default function SystemSettings({ onBack }: SystemSettingsProps) {
                       </div>
                     </div>
                   </div>
+                </div>
+                <div className="space-y-4">
+                  <h3 className="font-semibold">Announcement Editor</h3>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Badge variant={mode === 'preview' ? 'outline' : 'secondary'}>{mode === 'preview' ? 'Preview Mode' : 'Edit Mode'}</Badge>
+                    </div>
+                    <ToggleGroup type="single" value={mode} onValueChange={(v) => v && setMode(v as 'edit' | 'preview')} className="bg-muted/50 rounded-xl p-1">
+                      <ToggleGroupItem value="edit" className={mode === 'edit' ? 'bg-gradient-to-br from-primary to-primary-glow text-primary-foreground' : ''}>
+                        <Pencil className="w-4 h-4" />
+                      </ToggleGroupItem>
+                      <ToggleGroupItem value="preview" className={mode === 'preview' ? 'bg-gradient-to-br from-accent to-accent text-accent-foreground' : ''}>
+                        <Eye className="w-4 h-4" />
+                      </ToggleGroupItem>
+                    </ToggleGroup>
+                  </div>
+                  {mode === 'edit' ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-3">
+                        <Label htmlFor="annTitle">Title</Label>
+                        <Input id="annTitle" value={annTitle} onChange={(e) => setAnnTitle(e.target.value)} placeholder="Enter title" />
+                      </div>
+                      <div className="space-y-3">
+                        <Label htmlFor="annImageUrl" className="flex items-center gap-2"><ImageIcon className="w-4 h-4" />Image URL</Label>
+                        <Input id="annImageUrl" value={annImageUrl} onChange={(e) => setAnnImageUrl(e.target.value)} placeholder="https://..." />
+                      </div>
+                      <div className="md:col-span-2 space-y-3">
+                        <Label htmlFor="annBody">Body</Label>
+                        <Textarea id="annBody" value={annBody} onChange={(e) => setAnnBody(e.target.value)} rows={6} placeholder="Write announcement details" />
+                      </div>
+                      <div className="space-y-3">
+                        <Label htmlFor="annCtaText">Button Text</Label>
+                        <Input id="annCtaText" value={annCtaText} onChange={(e) => setAnnCtaText(e.target.value)} placeholder="Learn More" />
+                      </div>
+                      <div className="space-y-3">
+                        <Label htmlFor="annCtaHref" className="flex items-center gap-2"><LinkIcon className="w-4 h-4" />Button Link</Label>
+                        <Input id="annCtaHref" value={annCtaHref} onChange={(e) => setAnnCtaHref(e.target.value)} placeholder="https://example.com" />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="border rounded-xl p-4 bg-card/60 backdrop-blur-sm">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                        {annImageUrl ? (
+                          <img src={annImageUrl} alt="Announcement" className="w-full h-40 md:h-48 object-cover rounded-lg md:col-span-1" />
+                        ) : (
+                          <div className="w-full h-40 md:h-48 rounded-lg bg-muted flex items-center justify-center text-muted-foreground md:col-span-1">No image</div>
+                        )}
+                        <div className="md:col-span-2 space-y-2">
+                          <h4 className="text-xl font-semibold">{annTitle}</h4>
+                          <p className="text-muted-foreground whitespace-pre-wrap">{annBody}</p>
+                          <div className="pt-2">
+                            <FuturisticButton
+                              variant="futuristic"
+                              onClick={() => {
+                                if (annCtaHref) {
+                                  window.open(annCtaHref, '_blank');
+                                } else {
+                                  toast({ title: 'Preview Action', description: 'No link provided' });
+                                }
+                              }}
+                            >
+                              {annCtaText}
+                            </FuturisticButton>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
