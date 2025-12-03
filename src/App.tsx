@@ -53,7 +53,7 @@ const App = () => {
             You are offline. Some features may be unavailable.
           </div>
         )}
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
           <ErrorBoundary>
             <PageContainer>
               <Suspense fallback={<div className="p-4 text-center text-sm">Loading...</div>}>
