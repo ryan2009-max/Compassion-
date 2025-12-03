@@ -46,7 +46,7 @@ export default function Login() {
           .single();
 
         if (adminError || !adminData) {
-          await supabase.auth.signOut();
+          try { await supabase.auth.signOut({ scope: 'global' }); } catch {}
           setError('Admin account not found. Please contact support.');
           return;
         }
@@ -83,20 +83,20 @@ export default function Login() {
           .single();
 
         if (profileError || !profileData) {
-          await supabase.auth.signOut();
+          try { await supabase.auth.signOut({ scope: 'global' }); } catch {}
           setError('User profile not found. Please contact support.');
           return;
         }
 
         // Verify child number matches
         if (profileData.child_number !== credentials.childNumber) {
-          await supabase.auth.signOut();
+          try { await supabase.auth.signOut({ scope: 'global' }); } catch {}
           setError('Invalid child number. Please check your credentials.');
           return;
         }
 
         if (!profileData.is_active) {
-          await supabase.auth.signOut();
+          try { await supabase.auth.signOut({ scope: 'global' }); } catch {}
           setError('Your account is currently disabled. Please contact the administrator for assistance.');
           return;
         }

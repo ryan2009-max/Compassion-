@@ -81,7 +81,7 @@ export default function UserDashboard() {
         .single();
 
       if (error || !profileData) {
-        await supabase.auth.signOut();
+        try { await supabase.auth.signOut({ scope: 'global' }); } catch {}
         navigate('/login');
         return;
       }
@@ -180,7 +180,14 @@ export default function UserDashboard() {
   };
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    try {
+      await supabase.auth.signOut({ scope: 'global' });
+    } catch (e: any) {
+      const msg = e?.message || String(e || '');
+      if (!(e?.name === 'AbortError' || msg.includes('Abort'))) {
+        console.error('Logout error:', e);
+      }
+    }
     toast({
       title: "Logged out successfully",
       description: "Thank you for visiting your portal.",
