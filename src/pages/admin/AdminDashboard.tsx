@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Users, Settings, Shield, LogOut, Plus, Search, Edit, FolderOpen, Upload, FileText, Image as ImageIcon, Download } from 'lucide-react';
+import { Users, Settings, Shield, LogOut, Plus, Search, Edit, FolderOpen, Upload, FileText, Image as ImageIcon, Download, MessageSquare } from 'lucide-react';
 import SystemSettings from './SystemSettings';
 import { FuturisticButton } from '@/components/ui/futuristic-button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -121,7 +121,7 @@ export default function AdminDashboard() {
         .single();
 
       if (error || !adminData) {
-        try { await supabase.auth.signOut({ scope: 'global' }); } catch {}
+        try { await supabase.auth.signOut({ scope: 'local' }); } catch {}
         navigate('/login');
         return;
       }
@@ -130,7 +130,7 @@ export default function AdminDashboard() {
       
       // Ensure this is actually an admin
       if (adminData.role === 'user') {
-        try { await supabase.auth.signOut({ scope: 'global' }); } catch {}
+        try { await supabase.auth.signOut({ scope: 'local' }); } catch {}
         navigate('/login');
         return;
       }
@@ -165,7 +165,7 @@ export default function AdminDashboard() {
 
   const handleLogout = async () => {
     try {
-      await supabase.auth.signOut({ scope: 'global' });
+      await supabase.auth.signOut({ scope: 'local' });
     } catch (e: any) {
       const msg = e?.message || String(e || '');
       if (!(e?.name === 'AbortError' || msg.includes('Abort'))) {
@@ -941,7 +941,7 @@ const handleReplaceFileChange = async (event: React.ChangeEvent<HTMLInputElement
         </Card>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="card-futuristic interactive-scale cursor-pointer">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
@@ -985,6 +985,27 @@ const handleReplaceFileChange = async (event: React.ChangeEvent<HTMLInputElement
                 }}
               >
                 {admin.role === 'super-admin' ? 'Manage Admins' : 'View Only'}
+              </FuturisticButton>
+            </CardContent>
+          </Card>
+
+          <Card className="card-futuristic interactive-scale cursor-pointer">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <MessageSquare className="w-5 h-5 text-primary" />
+                <span>Caregiver SMS</span>
+              </CardTitle>
+              <CardDescription>
+                Bulk messaging to caregivers with delivery status and logs
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <FuturisticButton 
+                variant="outline" 
+                className="w-full"
+                onClick={() => navigate('/admin/messaging')}
+              >
+                Open Messaging
               </FuturisticButton>
             </CardContent>
           </Card>

@@ -32,8 +32,8 @@ const Index = () => {
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse-glow" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-pulse-glow" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-primary/5 to-accent/5 rounded-full blur-3xl animate-glow" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary/10 rounded-full blur-3xl animate-pulse-glow" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-full blur-3xl animate-glow" />
       </div>
 
       <div className="relative z-10 w-full max-w-4xl mx-auto animate-fade-in">
@@ -42,7 +42,7 @@ const Index = () => {
           <div className="space-y-4">
             <div className="flex justify-center">
               <div className="relative">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-3xl flex items-center justify-center shadow-lg mb-4">
+                <div className="w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-3xl flex items-center justify-center shadow-lg mb-4">
                   <button
                     type="button"
                     aria-label="Open login"
@@ -59,7 +59,7 @@ const Index = () => {
                     <span className="sr-only">FGCK LWANDA CDC HUB</span>
                   </button>
                 </div>
-                <div className="absolute -inset-2 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur animate-pulse-glow -z-10" />
+                <div className="absolute -inset-2 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur animate-pulse-glow -z-10" />
               </div>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-gradient mb-4">

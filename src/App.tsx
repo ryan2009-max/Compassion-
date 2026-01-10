@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import Login from "./pages/Login";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminManagement from "./pages/admin/AdminManagement";
+import CaregiverMessaging from "./pages/admin/CaregiverMessaging";
 import UserDashboard from "./pages/user/UserDashboard";
 import NotFound from "./pages/NotFound";
 const OfflinePage = lazy(() => import("./pages/offline/OfflinePage"));
@@ -62,6 +63,7 @@ const App = () => {
                   <Route path="/login" element={<Login />} />
                   <Route path="/admin/dashboard" element={<AdminDashboard />} />
                   <Route path="/admin/management" element={<AdminManagement />} />
+                  <Route path="/admin/messaging" element={<CaregiverMessaging />} />
                   <Route path="/user/dashboard" element={<UserDashboard />} />
                   <Route path="/offline" element={<OfflinePage />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

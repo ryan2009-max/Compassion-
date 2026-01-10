@@ -16,7 +16,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline transform hover:scale-105",
         glow: "btn-glow text-primary-foreground font-semibold shadow-lg hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105",
         success: "bg-success text-success-foreground hover:bg-success/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5",
-        futuristic: "bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold shadow-lg hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 border border-primary/20 backdrop-blur-sm"
+        futuristic: "bg-gradient-to-r from-primary to-secondary text-primary-foreground font-semibold shadow-lg hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 border border-primary/20 backdrop-blur-sm"
       },
       size: {
         default: "h-10 px-4 py-2",
@@ -49,7 +49,7 @@ const FuturisticButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {(variant === "glow" || variant === "futuristic") && (
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-accent/30 to-primary/30 animate-pulse-glow rounded-lg blur-sm" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-secondary/30 to-primary/30 animate-pulse-glow rounded-lg blur-sm" />
         )}
         <span className="relative z-10">{children}</span>
       </Comp>

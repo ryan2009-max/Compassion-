@@ -81,7 +81,7 @@ export default function UserDashboard() {
         .single();
 
       if (error || !profileData) {
-        try { await supabase.auth.signOut({ scope: 'global' }); } catch {}
+        try { await supabase.auth.signOut({ scope: 'local' }); } catch {}
         navigate('/login');
         return;
       }
@@ -181,7 +181,7 @@ export default function UserDashboard() {
 
   const handleLogout = async () => {
     try {
-      await supabase.auth.signOut({ scope: 'global' });
+      await supabase.auth.signOut({ scope: 'local' });
     } catch (e: any) {
       const msg = e?.message || String(e || '');
       if (!(e?.name === 'AbortError' || msg.includes('Abort'))) {

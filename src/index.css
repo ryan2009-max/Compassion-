@@ -5,86 +5,88 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Compassion Safe Design System - Dark futuristic theme with vibrant accents */
+/* Compassion Safe Design System - Modern Clean Theme */
 
 @layer base {
   :root {
-    /* Dark theme with vibrant accents */
-    --background: 222 23% 5%;
+    /* User Requested Vibrant Dark Theme - No White */
+    
+    /* Deep Background (Dark Blue/Purple mix) */
+    --background: 224 71% 4%; 
     --foreground: 210 40% 98%;
 
-    --card: 222 20% 8%;
+    /* Cards - Slightly lighter than background */
+    --card: 224 71% 8%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 20% 8%;
+    --popover: 224 71% 8%;
     --popover-foreground: 210 40% 98%;
 
-    /* Vibrant indigo primary */
-    --primary: 239 84% 67%;
-    --primary-foreground: 210 40% 98%;
-    --primary-glow: 239 84% 77%;
+    /* Trustworthy Blue Primary - #2563EB */
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 221 83% 70%;
 
-    /* Subtle secondary */
-    --secondary: 217 32% 17%;
-    --secondary-foreground: 210 40% 98%;
+    /* Purple Accent/Secondary - #7C3AED */
+    --secondary: 262 83% 58%;
+    --secondary-foreground: 0 0% 100%;
 
-    /* Muted elements */
-    --muted: 217 32% 17%;
-    --muted-foreground: 215 20% 65%;
+    /* Muted Elements */
+    --muted: 224 71% 12%;
+    --muted-foreground: 215 20% 70%;
 
-    /* Teal accent */
-    --accent: 180 84% 60%;
-    --accent-foreground: 210 40% 98%;
+    /* Accent - Green #16A34A (using as accent/success) */
+    --accent: 142 76% 36%;
+    --accent-foreground: 0 0% 100%;
 
-    /* Error states */
-    --destructive: 0 84% 60%;
+    /* Destructive/Error */
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    /* Borders and inputs */
-    --border: 217 32% 17%;
-    --input: 217 32% 20%;
-    --ring: 239 84% 67%;
+    /* Borders & Inputs - Visible on dark */
+    --border: 224 71% 20%;
+    --input: 224 71% 20%;
+    --ring: 262 83% 58%; /* Purple ring */
 
-    /* Success color */
-    --success: 142 71% 45%;
-    --success-foreground: 210 40% 98%;
-
-    /* Warning color */
+    /* Semantic Colors */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    
     --warning: 38 92% 50%;
-    --warning-foreground: 222 23% 5%;
+    --warning-foreground: 0 0% 100%;
 
-    /* Enhanced radius for modern look */
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-card: linear-gradient(135deg, hsl(var(--card)), hsl(217 32% 12%));
-    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(180 84% 70%));
+    /* Gradients - Vibrant */
+    --gradient-primary: linear-gradient(135deg, hsl(221 83% 53%), hsl(262 83% 58%)); /* Blue to Purple */
+    --gradient-card: linear-gradient(135deg, hsl(224 71% 8%), hsl(224 71% 12%));
+    --gradient-accent: linear-gradient(135deg, hsl(142 76% 36%), hsl(160 84% 39%)); /* Green */
 
-    /* Shadows with glow effects */
-    --shadow-primary: 0 10px 30px -10px hsl(var(--primary) / 0.3);
-    --shadow-card: 0 8px 32px -8px hsl(222 23% 2% / 0.4);
-    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.2);
+    /* Shadows */
+    --shadow-primary: 0 10px 30px -10px hsl(221 83% 53% / 0.5);
+    --shadow-card: 0 4px 20px -2px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 30px hsl(262 83% 58% / 0.4);
 
     /* Animation variables */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-spring: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 224 71% 6%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 221 83% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 262 83% 58%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 224 71% 20%;
+    --sidebar-ring: 262 83% 58%;
+  }
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+  /* Dark mode stays similar to root now since root is dark */
+  .dark {
+    /* ... (inherited mostly, but ensuring consistency) */
+    --background: 224 71% 4%;
+    --foreground: 210 40% 98%;
+    /* ... */
   }
 }
 
@@ -98,10 +100,21 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    /* Animated Gradient Background */
+    background: linear-gradient(-45deg, #020617, #1e1b4b, #0f172a, #312e81);
+    background-size: 400% 400%;
+    animation: gradient-bg 15s ease infinite;
+    @apply text-foreground min-h-screen;
+    
     font-feature-settings: 'cv11', 'ss01';
     font-variation-settings: 'opsz' 32;
     text-rendering: optimizeLegibility;
+  }
+
+  @keyframes gradient-bg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   /* Scrollbar styling */

@@ -6,7 +6,7 @@ type LogoProps = React.ComponentProps<"div"> & {
   imgClassName?: string;
 };
 
-const candidates = ["/logo.svg", "/logo.png", "/placeholder.svg"];
+const candidates = ["/logo.png", "/logo.svg", "/placeholder.svg"];
 
 const Logo = React.forwardRef<HTMLDivElement, LogoProps>(({ className, imgClassName, ...props }, ref) => {
   const [index, setIndex] = React.useState(0);
